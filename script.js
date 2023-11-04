@@ -210,21 +210,94 @@ function mouseDragged() {
         redraw();
     }
 }
-
+//updating  turn
 function updateTurnDisplay() {
     let turnText = "Turn: " + (isWhitesTurn ? "White" : "Black");
     document.getElementById("turnDisplay").innerText = turnText;
+
+    // Calculate enemy moves only once and pass to checkForCheck
+    let enemyColor = isWhitesTurn ? 'black' : 'white';
+    let allEnemyMoves = getAllEnemyMoves(enemyColor);
+    
+    // Only the player whose turn it is can be in check
+    checkForCheck(isWhitesTurn ? 'white' : 'black', allEnemyMoves);
 }
 
-document.getElementById('darkModeSwitch').addEventListener('change', (event) => {
-    let chessBoard = document.getElementById('gameContainer');
-    if (event.target.checked) {
-        chessBoard.className = 'dark-mode';
+function checkForCheck(color, enemyMoves) {
+    const kingPosition = findKingPosition(color);
+    if (kingPosition) {
+      for (let move of enemyMoves) {
+        if (!move || move.length < 2) {
+          console.error('Invalid move detected:', move);
+          continue; // Skip this iteration if move is not valid
+        }
+
+        if (move[0] === kingPosition.column && move[1] === kingPosition.row) {
+          alert(color.charAt(0).toUpperCase() + color.slice(1) + ' King is in Shah (Check)');
+          return; // Exit after finding a check
+        }
+      }
     } else {
-        chessBoard.className = 'light-mode';
+      console.error(`King position for ${color} not found.`);
     }
-    redraw()
-});
+}
+
+
+  function getAllEnemyMoves(enemyColor) {
+    let moves = [];
+  
+    // Temporarily store possible moves to prevent overriding the actual game state
+    let originalPossibleMoves = possibleMoves;
+    let originalPossibleMovesToEnemy = possibleMovesToEnemy;
+  
+    for (let piece of pieces) {
+      if (piece.color === enemyColor) {
+        possibleMoves = [];
+        possibleMovesToEnemy = [];
+        
+        // Collect the moves according to the type of the piece
+        if (piece instanceof Pawn) {
+          moves = moves.concat(showPossiblePawnMoves(piece));
+        } else if (piece instanceof Rook) {
+          moves = moves.concat(showPossibleRookMoves(piece));
+        } else if (piece instanceof Knight) {
+          moves = moves.concat(showPossibleKnightMoves(piece));
+        } else if (piece instanceof Bishop) {
+          moves = moves.concat(showPossibleBishopMoves(piece));
+        } else if (piece instanceof Queen) {
+          moves = moves.concat(showPossibleQueenMoves(piece));
+        } else if (piece instanceof King) {
+          moves = moves.concat(showPossibleKingMoves(piece));
+        }
+  
+        // Add moves that result in attacks
+        moves = moves.concat(possibleMovesToEnemy);
+      }
+    }
+  
+    // Restore the original possible moves after calculations
+    possibleMoves = originalPossibleMoves;
+    possibleMovesToEnemy = originalPossibleMovesToEnemy;
+  
+    return moves;
+  }
+  
+  
+  function findKingPosition(color) {
+    for (let piece of pieces) {
+      if (piece instanceof King && piece.color === color) {
+        return {
+          column: Math.floor(piece.x / squareSize),
+          row: Math.floor(piece.y / squareSize)
+        };
+      }
+    }
+    return null; // In case the king is not found, which should not happen
+  }
+  
+  
+
+
 
 function drawBoard() {
     let lightColor = color('#EEEED2');
