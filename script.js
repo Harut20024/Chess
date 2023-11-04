@@ -3,21 +3,17 @@ let possibleMoves = [];
 let possibleMovesToEnemy = [];
 let originalX;
 let originalY;
-let rockImage1;
-let rockImage2;
-let pawnImage1;
-let pawnImage2;
-let knightImage1;
-let knightImage2;
-let bishopImage1;
-let bishopImage2;
+let rockImage1, rockImage2, pawnImage1, pawnImage2, knightImage1, knightImage2, bishopImage1, bishopImage2, queenImage1, queenImage2, kingImage1, kingImage2;
 let squareSize;
 let rocks = [];
 let pawns = [];
 let pieces = [];
 let knights = [];
 let bishops = [];
+let queens = [];
+let kings = [];
 let isWhitesTurn = true;
+let count = 0;
 
 function preload() {
     rockImage1 = loadImage("objects/photos/Rookphotos/Rock1.png");
@@ -28,6 +24,10 @@ function preload() {
     knightImage2 = loadImage("objects/photos/Knightphotos/knight2.png");
     bishopImage1 = loadImage("objects/photos/Bishopphotos/Bishop1.png");
     bishopImage2 = loadImage("objects/photos/Bishopphotos/Bishop2.png");
+    queenImage1 = loadImage("objects/photos/Queenphotos/Queen1.png");
+    queenImage2 = loadImage("objects/photos/Queenphotos/Queen2.png");
+    kingImage1 = loadImage("objects/photos/Kingphotos/King1.png");
+    kingImage2 = loadImage("objects/photos/Kingphotos/King2.png");
 }
 
 function setup() {
@@ -51,10 +51,18 @@ function setup() {
             bishops.push(new Bishop(i * squareSize, 0, squareSize, 'white', bishopImage1));
             bishops.push(new Bishop(i * squareSize, 7 * squareSize, squareSize, 'black', bishopImage2));
         }
+        if (i === 3) {
+            queens.push(new Queen(i * squareSize, 0, squareSize, 'white', queenImage1));
+            queens.push(new Queen(i * squareSize, 7 * squareSize, squareSize, 'black', queenImage2));
+        }
+        if (i === 4) {
+            kings.push(new King(i * squareSize, 0, squareSize, 'white', kingImage1));
+            kings.push(new King(i * squareSize, 7 * squareSize, squareSize, 'black', kingImage2));
+        }
 
     }
 
-    pieces = [...pawns, ...rocks,...knights,...bishops];
+    pieces = [...pawns, ...rocks, ...knights, ...bishops, ...queens, ...kings];
 }
 
 function draw() {
@@ -62,11 +70,9 @@ function draw() {
     drawBoard();
     drawPossibleMoves();
     drawPossibleAttacks();
-
     for (let piece of pieces) {
         piece.display();
     }
-
 }
 
 function mouseReleased() {
@@ -99,9 +105,18 @@ function mouseReleased() {
 function removeCapturedPiece(column, row, capturingPieceColor) {
     const capturedIndex = pieces.findIndex(piece => isSamePositionAndColor(piece, column, row, capturingPieceColor));
     if (capturedIndex !== -1) {
+        if (pieces[capturedIndex] instanceof King) {
+            alert(capturingPieceColor === 'white' ? 'White wins!' : 'Black wins!');
+            resetGame(); 
+
+        }
         // Remove from the  arrays
         removePieceFromArray(pieces[capturedIndex], pawns);
         removePieceFromArray(pieces[capturedIndex], rocks);
+        removePieceFromArray(pieces[capturedIndex], bishops);
+        removePieceFromArray(pieces[capturedIndex], knights);
+        removePieceFromArray(pieces[capturedIndex], queens);
+        removePieceFromArray(pieces[capturedIndex], kings);
         pieces.splice(capturedIndex, 1);
     }
 }
@@ -134,7 +149,7 @@ function mousePressed() {
                 originalY = piece.y;
                 cursor(HAND);
 
-                // Determine which piece type is selected and show the possible moves
+                // Check the instance of the piece and show moves accordingly
                 if (piece instanceof Pawn) {
                     showPossiblePawnMoves(piece);
                 } else if (piece instanceof Rook) {
@@ -142,12 +157,16 @@ function mousePressed() {
                 } else if (piece instanceof Knight) {
                     showPossibleKnightMoves(piece);
                 } else if (piece instanceof Bishop) {
-                    showPossibleBishopMoves(piece); // Show moves for bishop
+                    showPossibleBishopMoves(piece);
+                } else if (piece instanceof Queen) {
+                    showPossibleQueenMoves(piece);
+                } else if (piece instanceof King) {
+                    showPossibleKingMoves(piece);
                 }
                 return;
             }
         }
-    }   
+    }
 
     redraw();
 }
@@ -222,4 +241,14 @@ function drawBoard() {
             rect(j * squareSize, i * squareSize, squareSize, squareSize);
         }
     }
+}
+function resetGame() {
+    pieces = [];
+    pawns = [];
+    rocks = [];
+    knights = [];
+    bishops = [];
+    queens = [];
+    isWhitesTurn = true; 
+    setup();
 }
