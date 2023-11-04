@@ -107,6 +107,7 @@ function removeCapturedPiece(column, row, capturingPieceColor) {
     if (capturedIndex !== -1) {
         if (pieces[capturedIndex] instanceof King) {
             alert(capturingPieceColor === 'white' ? 'White wins!' : 'Black wins!');
+            noLoop();
             resetGame(); 
 
         }
@@ -249,6 +250,10 @@ function resetGame() {
     knights = [];
     bishops = [];
     queens = [];
+
+
     isWhitesTurn = true; 
+
+
     setup();
 }
