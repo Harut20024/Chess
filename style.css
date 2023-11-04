@@ -1,0 +1,34 @@
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#gameContainer {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+#turnDisplay {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    margin-bottom: 20px;
+    margin-top: 10px;
+    font-size: 24px;
+    color: #333;
+}
+#themeSwitch{
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+canvas {
+    border: 1px solid #000;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
