@@ -347,3 +347,9 @@ function drawBoard() {
         }
     }
 }
+
+let button = document.getElementsByClassName("chess-button")[0];
+button.addEventListener("click", () => {
+    window.location.reload();
+});
+

@@ -18,7 +18,7 @@ body {
     background-color: rgba(139, 69, 19, 0.3);
     margin-left: auto;
     margin-right: auto;
-    height: 110px;
+    height: 140px;
     border: 1px solid beige;
     border-radius: 15px;
     width: 700px;
@@ -31,13 +31,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     margin-top: 10px;
     font-size: 24px;
 }
 
 #themeSwitch {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     margin-top: 10px;
 }
 
@@ -61,3 +61,31 @@ canvas {
     background-color: #eee;
     color: #000;
 }
+
+.chess-button {
+    padding: 12px 24px;
+    background-color: #b69b4c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+  }
+  
+  .chess-button:hover {
+    background-color: #c7a76a;
+  }
+  
+  .chess-button:focus {
+    outline: 2px solid #dcd0ba;
+    outline-offset: 2px;
+  }
+  
+  .chess-button:active {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
