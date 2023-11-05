@@ -5,7 +5,23 @@ html {
     height: 100%;
 }
 
+body {
+    background-image: url('objects/photos/backgraund.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
 #gameContainer {
+    background-color: rgba(139, 69, 19, 0.3);
+    margin-left: auto;
+    margin-right: auto;
+    height: 110px;
+    border: 1px solid beige;
+    border-radius: 15px;
+    width: 700px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,7 +34,6 @@ html {
     margin-bottom: 20px;
     margin-top: 10px;
     font-size: 24px;
-    color: #333;
 }
 
 #themeSwitch {
@@ -36,7 +51,8 @@ canvas {
 
 
 .check-alert {
-    color: red;
+    color: #dc143c;
+    font-size: 30px;
     font-weight: bold;
 }
 
@@ -45,5 +61,3 @@ canvas {
     background-color: #eee;
     color: #000;
 }
-
-

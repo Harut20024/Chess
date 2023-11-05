@@ -111,7 +111,7 @@ function removeCapturedPiece(column, row, capturingPieceColor) {
         if (pieces[capturedIndex] instanceof King) {
             alert(capturingPieceColor === 'white' ? 'White wins!' : 'Black wins!');
             noLoop();
-            resetGame();
+            window.location.reload();
 
         }
         // Remove from the  arrays
@@ -221,8 +221,8 @@ function updateTurnDisplay(check) {
     document.getElementById("turnDisplay").innerText = turnText;
 
     if (check) {
-        document.getElementById("turnDisplay").innerText += " - King is in Check!";
         document.getElementById("turnDisplay").classList.add("check-alert");
+        document.getElementById("turnDisplay").innerText += " - King is in Check!";
     } else {
         document.getElementById("turnDisplay").classList.remove("check-alert");
     }
@@ -253,7 +253,7 @@ function checkForCheck(color) {
     }
 
     updateTurnDisplay(false);
-    return false; 
+    return false;
 }
 
 
@@ -305,7 +305,7 @@ function findKingPosition(color) {
             };
         }
     }
-    return null; 
+    return null;
 }
 function makeMove(piece, targetX, targetY) {
     isWhitesTurn = !isWhitesTurn;
@@ -329,13 +329,15 @@ document.getElementById('darkModeSwitch').addEventListener('change', (event) => 
 });
 
 function drawBoard() {
-    let lightColor = color('#EEEED2');
-    let darkColor = color('#769656');
-
+    let lightColor
+    let darkColor
     let isDarkMode = document.getElementById('gameContainer').classList.contains('dark-mode');
     if (isDarkMode) {
         lightColor = color('#f2d1b3');
         darkColor = color('#4d2600');
+    } else {
+        lightColor = color('#EEEED2');
+        darkColor = color('#769656');
     }
 
     for (let i = 0; i < 8; i++) {
@@ -344,24 +346,4 @@ function drawBoard() {
             rect(j * squareSize, i * squareSize, squareSize, squareSize);
         }
     }
-}
-
-
-
-function resetGame() {
-    pieces = [];
-    pawns = [];
-    rocks = [];
-    knights = [];
-    bishops = [];
-    queens = [];
-    kings = [];
-    isWhitesTurn = true;
-
-
-    checkForCheck('white');
-    checkForCheck('black'); 
-    window.location.reload();
-
-
 }
