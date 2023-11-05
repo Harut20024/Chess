@@ -1,5 +1,5 @@
 # Grandmaster's Retreat: Chess Reimagined
-![Portfollio](https://github.com/Harut20024/full-stack-website/blob/main/views/screnn/Screenshot_1.png)
+![Portfollio](https://github.com/Harut20024/Chess/blob/main/objects/photos/backgraund.png)
 Welcome to Grandmaster's Retreat, where the age-old game of chess is reinvented with a digital twist, providing an experience that both purists and modern gamers can relish. This repository houses my personal take on this timeless strategy game, wrapped in a veneer of contemporary web technologies.
 
 ## Key Features
