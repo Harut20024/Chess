@@ -32,3 +32,24 @@ canvas {
 
 
 
+.check-alert {
+    color: red; /* Or any other styles to indicate a check */
+    font-weight: bold;
+    /* Additional styles can be added here */
+  }
+  
+
+  /* Default light theme */
+.game-container {
+    background-color: #eee;
+    color: #000;
+  }
+  
+  /* Dark theme styles */
+  .dark-mode {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  /* Add any specific board or element styles needed for light/dark themes */
+  
