@@ -213,14 +213,15 @@ function mouseDragged() {
         redraw();
     }
 }
+
 //updating  turn
+
 function updateTurnDisplay(check) {
     let turnText = "Turn: " + (isWhitesTurn ? "White" : "Black");
     document.getElementById("turnDisplay").innerText = turnText;
 
     if (check) {
         document.getElementById("turnDisplay").innerText += " - King is in Check!";
-        // Add a class that changes the display, e.g., a red border or background
         document.getElementById("turnDisplay").classList.add("check-alert");
     } else {
         document.getElementById("turnDisplay").classList.remove("check-alert");
@@ -317,7 +318,15 @@ function makeMove(piece, targetX, targetY) {
 }
 
 
-
+document.getElementById('darkModeSwitch').addEventListener('change', (event) => {
+    let chessBoard = document.getElementById('gameContainer');
+    if (event.target.checked) {
+        chessBoard.className = 'dark-mode';
+    } else {
+        chessBoard.className = 'light-mode';
+    }
+    redraw()
+});
 
 function drawBoard() {
     let lightColor = color('#EEEED2');
@@ -336,6 +345,7 @@ function drawBoard() {
         }
     }
 }
+
 
 
 function resetGame() {

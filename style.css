@@ -1,5 +1,5 @@
-
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -7,22 +7,25 @@ body, html {
 
 #gameContainer {
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
+    flex-direction: column;
+    align-items: center;
 }
+
 #turnDisplay {
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
     margin-bottom: 20px;
     margin-top: 10px;
     font-size: 24px;
     color: #333;
 }
-#themeSwitch{
+
+#themeSwitch {
     margin-bottom: 20px;
     margin-top: 10px;
 }
+
 canvas {
     border: 1px solid #000;
     display: flex;
@@ -33,23 +36,14 @@ canvas {
 
 
 .check-alert {
-    color: red; /* Or any other styles to indicate a check */
+    color: red;
     font-weight: bold;
-    /* Additional styles can be added here */
-  }
-  
+}
 
-  /* Default light theme */
+
 .game-container {
     background-color: #eee;
     color: #000;
-  }
-  
-  /* Dark theme styles */
-  .dark-mode {
-    background-color: #333;
-    color: #fff;
-  }
-  
-  /* Add any specific board or element styles needed for light/dark themes */
-  
+}
+
+
